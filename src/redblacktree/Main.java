@@ -19,7 +19,7 @@ public class Main {
             = new RedBlackTree<InsertComplexities.InstrumentedKey, Integer>();
 
         int[] rbtComplexities = util.getInsertComplexities(bll, MAX_SIZE,
-                REPITITIONS);
+            REPETITIONS);
 
         output("RedBlackTree", rbtComplexities);
     }
