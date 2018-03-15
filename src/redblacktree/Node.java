@@ -101,7 +101,7 @@ public final class Node<K extends Comparable<? super K>, V> {
     Node<K,V> tempParent = parent;
     left.setRight(this);
     reparent(left, tempParent, wasRight);
-    this.setRight(temp);
+    this.setLeft(temp);
     return this;
   }
 
