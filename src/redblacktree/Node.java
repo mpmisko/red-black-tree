@@ -153,13 +153,4 @@ public final class Node<K extends Comparable<? super K>, V> {
     return "{ " + colour + ": " + left + " [" + key + ", " + value + "] "
         + right + " }";
   }
-
-  public static void main(String[] args) {
-    RedBlackTree<Integer, String> tree = new RedBlackTree<Integer, String>();
-    Integer[] test = { 1, 3, 5, 7, 9, 10, 8, 6, 4, 2, 0 };
-    for (Integer k : test) {
-      System.out.println(k);
-      tree.put(k, k.toString());
-    }
-  }
 }
