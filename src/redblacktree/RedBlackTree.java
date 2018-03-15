@@ -76,10 +76,10 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
     Node<K, V> parent = current.getParent();
 
     if(current.isRightChild() && parent.isLeftChild()) {
-      parent = parent.rotateLeft();
+      parent.rotateLeft();
       insertCaseFive(parent);
     } else if (current.isLeftChild() && parent.isRightChild()) {
-      parent = parent.rotateRight();
+      parent.rotateRight();
       insertCaseFive(parent);
     } else {
       insertCaseFive(current);

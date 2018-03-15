@@ -86,25 +86,32 @@ public final class Node<K extends Comparable<? super K>, V> {
   }
 
   public Node<K, V> rotateLeft() {
+    Node<K,V> temp = right.getLeft();
+    Node<K,V> tempParent = parent;
     right.setLeft(this);
-    reparent(right);
-    this.setRight(right.getLeft());
+    reparent(right, tempParent);
+    this.setRight(temp);
     return this;
   }
 
   public Node<K, V> rotateRight() {
+    Node<K,V> temp = left.getRight();
+    Node<K,V> tempParent = parent;
     left.setRight(this);
-    reparent(left);
-    this.setLeft(left.getRight());
+    reparent(left, tempParent);
+    this.setRight(temp);
     return this;
   }
 
-  private void reparent(Node<K, V> replacement) {
-      if (this.isLeftChild()) {
-        parent.setLeft(replacement);
-      } else {
+  private void reparent(Node<K, V> replacement, Node<K, V> parent) {
+    replacement.setParent(parent);
+    if (parent != null) {
+      if (isRightChild()) {
         parent.setRight(replacement);
+      } else {
+        parent.setLeft(replacement);
       }
+    }
   }
 
 
