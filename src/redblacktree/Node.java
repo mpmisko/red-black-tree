@@ -1,5 +1,7 @@
 package redblacktree;
 
+import java.util.Objects;
+
 public final class Node<K extends Comparable<? super K>, V> {
 
   private Node<K, V> left;
@@ -59,6 +61,12 @@ public final class Node<K extends Comparable<? super K>, V> {
     return parent != null && parent.getRight() == this;
   }
 
+  public boolean uncleExists() {
+    return getUncle() != null;
+  }
+
+  public boolean isRootNode() { return getParent() == null;}
+
   public Node<K, V> getLeft() {
     return this.left;
   }
@@ -78,18 +86,27 @@ public final class Node<K extends Comparable<? super K>, V> {
   }
 
   public Node<K, V> rotateRight() {
-    Node<K,V> tempTree = this.left;
-    this.setLeft(this.getParent());
-    this.getLeft().setRight(tempTree);
+    this.setRight(right.getLeft());
+    reparent(right);
+    right.setLeft(this);
     return this;
   }
 
   public Node<K, V> rotateLeft() {
-    Node<K,V> tempTree = this.right;
-    this.setRight(this.getParent());
-    this.getRight().setLeft(tempTree);
+    this.setLeft(left.getRight());
+    reparent(left);
+    left.setRight(this);
     return this;
   }
+
+  private void reparent(Node<K, V> replacement) {
+    if(this.isLeftChild()) {
+      parent.setLeft(replacement);
+    } else {
+      parent.setRight(replacement);
+    }
+  }
+
 
   /* Colour operations */
 
@@ -126,5 +143,14 @@ public final class Node<K extends Comparable<? super K>, V> {
   public String toString() {
     return "{ " + colour + ": " + left + " [" + key + ", " + value + "] "
         + right + " }";
+  }
+
+  public static void main(String[] args) {
+    RedBlackTree<Integer, String> tree = new RedBlackTree<Integer, String>();
+    Integer[] test = { 1, 3, 5, 7, 9, 10, 8, 6, 4, 2, 0 };
+    for (Integer k : test) {
+      System.out.println(k);
+      tree.put(k, k.toString());
+    }
   }
 }

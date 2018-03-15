@@ -45,23 +45,59 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
   }
 
   private void insertCaseOne(Node<K, V> current) {
-    throw new RuntimeException("TODO: implement insertion case 1");
+    if(current.isRootNode()) {
+      current.setBlack();
+    } else {
+      insertCaseTwo(current);
+    }
   }
 
   private void insertCaseTwo(Node<K, V> current) {
-    throw new RuntimeException("TODO: implement insertion case 2");
+    System.out.println("two");
+    if(!current.getParent().isBlack()) {
+      insertCaseThree(current);
+    }
   }
 
   private void insertCaseThree(Node<K, V> current) {
-    throw new RuntimeException("TODO: implement insertion case 3");
+    System.out.println("three");
+    if(current.uncleExists() && current.getUncle().isRed()) {
+      current.getUncle().setBlack();
+      current.getParent().setBlack();
+      current.getGrandparent().setRed();
+      insertCaseOne(current.getGrandparent());
+    } else {
+      insertCaseFour(current);
+    }
   }
 
   private void insertCaseFour(Node<K, V> current) {
-    throw new RuntimeException("TODO: implement insertion case 4");
+    System.out.println("four");
+    Node<K, V> parent = current.getParent();
+
+    if(current.isRightChild() && parent.isLeftChild()) {
+      parent = parent.rotateLeft();
+      insertCaseFive(parent);
+    } else if (current.isLeftChild() && parent.isRightChild()) {
+      parent = parent.rotateRight();
+      insertCaseFive(parent);
+    } else {
+      insertCaseFive(current);
+    }
   }
 
   private void insertCaseFive(Node<K, V> current) {
-    throw new RuntimeException("TODO: implement insertion case 5");
+    System.out.println("five");
+    Node<K,V> parent = current.getParent();
+    Node<K,V> grandParent = current.getGrandparent();
+
+    parent.setBlack();
+    current.getGrandparent().setRed();
+    if(parent.isLeftChild()) {
+      grandParent.rotateRight();
+    } else {
+      grandParent.rotateLeft();
+    }
   }
 
   private Tuple<Node<K, V>, Node<K, V>> findNode(K key) {

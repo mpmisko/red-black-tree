@@ -26,10 +26,8 @@ public class Contains {
     for (Integer k : keys) {
       tree.put(k, k.toString());
     }
-
     for (Integer k : keys) {
       Assert.assertTrue(tree.contains(k));
     }
   }
-
 }
