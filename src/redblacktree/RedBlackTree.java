@@ -93,10 +93,10 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
 
     parent.setBlack();
     current.getGrandparent().setRed();
-    if(parent.isLeftChild()) {
-      grandParent.rotateRight();
-    } else {
+    if(parent.isRightChild()) {
       grandParent.rotateLeft();
+    } else {
+      grandParent.rotateRight();
     }
   }
 
