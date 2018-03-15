@@ -56,14 +56,12 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
   }
 
   private void insertCaseTwo(Node<K, V> current) {
-    System.out.println("two");
     if(!current.getParent().isBlack()) {
       insertCaseThree(current);
     }
   }
 
   private void insertCaseThree(Node<K, V> current) {
-    System.out.println("three");
     if(current.uncleExists() && current.getUncle().isRed()) {
       current.getUncle().setBlack();
       current.getParent().setBlack();
@@ -75,7 +73,6 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
   }
 
   private void insertCaseFour(Node<K, V> current) {
-    System.out.println("four");
     Node<K, V> parent = current.getParent();
 
     if(current.isRightChild() && parent.isLeftChild()) {
@@ -90,7 +87,6 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
   }
 
   private void insertCaseFive(Node<K, V> current) {
-    System.out.println("five");
     Node<K,V> parent = current.getParent();
     Node<K,V> grandParent = current.getGrandparent();
 
