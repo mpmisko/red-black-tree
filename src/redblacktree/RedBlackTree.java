@@ -42,6 +42,9 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
 
     insertCaseOne(newNode);
 
+    if(!root.isRootNode()) {
+      root = findRoot();
+    }
   }
 
   private void insertCaseOne(Node<K, V> current) {
@@ -132,6 +135,14 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
       throw new NoSuchElementException();
     }
     return current.getValue();
+  }
+
+  private Node<K,V> findRoot() {
+    Node<K,V> res = root;
+    while(res.getParent() != null) {
+      res = res.getParent();
+    }
+    return res;
   }
 
   public void clear() {
