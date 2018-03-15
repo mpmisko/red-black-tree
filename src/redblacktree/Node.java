@@ -105,6 +105,7 @@ public final class Node<K extends Comparable<? super K>, V> {
     return this;
   }
 
+  //sets correct parent
   private void reparent(Node<K, V> replacement, Node<K, V> parent, boolean rightChild) {
     replacement.setParent(parent);
     if (parent != null) {
