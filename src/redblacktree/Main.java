@@ -3,6 +3,8 @@ package redblacktree;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -13,14 +15,13 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         InsertComplexities util = new InsertComplexities(new Random("Macavity"
-                .hashCode()));
+            .hashCode()));
 
         RedBlackTree<InsertComplexities.InstrumentedKey, Integer> bll
             = new RedBlackTree<InsertComplexities.InstrumentedKey, Integer>();
 
         int[] rbtComplexities = util.getInsertComplexities(bll, MAX_SIZE,
             REPETITIONS);
-
         output("RedBlackTree", rbtComplexities);
     }
 
